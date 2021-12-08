@@ -29,14 +29,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>azure-spring-cloud-appconfiguration-config</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-webapp-maven-plugin</artifactId>
+            <version>2.2.3</version>
         </dependency>
 
     </dependencies>
@@ -46,6 +41,35 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-webapp-maven-plugin</artifactId>
+                <version>2.2.3</version>
+                <configuration>
+                    <subscriptionId>c2324f55-3b72-4e08-a986-18c5e38272cb</subscriptionId>
+                    <resourceGroup>ExamPrep</resourceGroup>
+                    <appName>certification-test</appName>
+                    <pricingTier>S1</pricingTier>
+                    <region>West EU</region>
+                    <runtime>
+                        <os>Linux</os>
+                        <webContainer>Java SE</webContainer>
+                        <javaVersion>Java 11</javaVersion>
+                    </runtime>
+                    <deployment>
+                        <resources>
+                            <resource>
+                                <type>jar</type>
+                                <directory>${project.basedir}/target</directory>
+                                <includes>
+                                    <include>*.jar</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </deployment>
+                </configuration>
             </plugin>
         </plugins>
     </build>
